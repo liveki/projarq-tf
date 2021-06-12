@@ -9,15 +9,10 @@ import com.bcopstein.negocio.repositorios.IVendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
-public class Venda_IMPL implements IVendaRepository {
-
-  private IVendaRepositoryJPA vendaRepository;
+public class VendaJpa_IMPL implements IVendaRepository {
 
   @Autowired
-  public Venda_IMPL(IVendaRepositoryJPA vendaRepository) {
-    this.vendaRepository = vendaRepository;
-  }
+  private IVendaRepositoryJPA vendaRepository;
 
   @Override
   public void cadastra(Venda venda) {
