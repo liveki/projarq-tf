@@ -7,7 +7,6 @@ import com.bcopstein.negocio.entidades.Venda;
 import com.bcopstein.negocio.repositorios.IVendaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 public class VendaJpa_IMPL implements IVendaRepository {
 
