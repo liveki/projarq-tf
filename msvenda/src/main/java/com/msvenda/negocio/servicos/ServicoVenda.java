@@ -55,29 +55,6 @@ public class ServicoVenda {
   }
 
   public boolean cadastraVenda(Venda novaVenda) {
-    IRestricaoHorarioVenda restricaoVenda = RestricaoVendaFactory.getInstance(LocalTime.now());
-    boolean vendaIsValida = restricaoVenda.vendaIsValida(novaVenda);
-
-    if (!vendaIsValida) {
-      return false;
-    }
-
-    List<ItemCarrinho> produtos = novaVenda.getProdutos();
-
-    for (ItemCarrinho produto : produtos) {
-      boolean podeVender = servicoEstoque.podeVender(produto.getCodProduto(), produto.getQuantidade());
-
-      if (!podeVender) {
-        return false;
-      }
-    }
-
-    for (ItemCarrinho produto : produtos) {
-      ItemEstoque itemEstoque = servicoEstoque.getProduto(produto.getCodProduto());
-      itemEstoque.setQtdade(itemEstoque.getQtdade() - produto.getQuantidade());
-      servicoEstoque.atualizaProduto(itemEstoque);
-    }
-
     this.vendaRepository.cadastra(novaVenda);
 
     return true;

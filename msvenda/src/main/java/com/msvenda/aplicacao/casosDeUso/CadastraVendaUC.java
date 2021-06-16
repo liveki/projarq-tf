@@ -24,19 +24,7 @@ public class CadastraVendaUC {
     this.servicoProduto = servicoProduto;
   }
 
-  public boolean executar(List<SubtotalDTO> itensDTO) {
-
-    List<ItemCarrinho> itens = new ArrayList<>(0);
-    List<Produto> produtos = servicoProduto.todos();
-
-    for (SubtotalDTO item : itensDTO) {
-      Produto novoProduto = produtos.stream().filter(p -> p.getCodigo() == item.getCodigo()).findFirst().orElse(null);
-      itens.add(new ItemCarrinho(novoProduto.getCodigo(), Double.valueOf(novoProduto.getPreco()).intValue(),
-          item.getQuantidade()));
-    }
-
-    Integer[] valores = servicoVenda.consultaVenda(itens);
-    Venda novaVenda = new Venda(valores[0], valores[1], valores[2], itens);
+  public boolean executar(Venda novaVenda) {
     return servicoVenda.cadastraVenda(novaVenda);
   }
 }

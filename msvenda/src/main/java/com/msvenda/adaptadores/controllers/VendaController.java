@@ -30,12 +30,14 @@ public class VendaController {
   @GetMapping("/historico")
   @CrossOrigin(origins = "*")
   public List<Venda> vendasEfetuadas() {
+    System.out.print("cheguei no historico do microserviço");
     return consultaVendas.executar();
   }
 
   @PostMapping("/confirmacao")
   @CrossOrigin(origins = "*")
-  public Boolean confirmaVenda(@RequestBody final List<SubtotalDTO> itens) {
-    return cadastraVenda.executar(itens);
+  public Boolean confirmaVenda(@RequestBody final Venda venda) {
+    System.out.print("cheguei no microserviço de vendas");
+    return cadastraVenda.executar(venda);
   }
 }
