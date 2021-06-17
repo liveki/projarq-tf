@@ -2,7 +2,6 @@ package com.msvenda.adaptadores.controllers;
 
 import java.util.List;
 
-import com.msvenda.adaptadores.controllers.DTO.SubtotalDTO;
 import com.msvenda.aplicacao.casosDeUso.CadastraVendaUC;
 import com.msvenda.aplicacao.casosDeUso.ConsultaVendasUC;
 import com.msvenda.negocio.entidades.Venda;

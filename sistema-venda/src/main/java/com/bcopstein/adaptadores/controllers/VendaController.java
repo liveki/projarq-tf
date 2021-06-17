@@ -43,7 +43,7 @@ public class VendaController {
 
   @PostMapping("/confirmacao")
   @CrossOrigin(origins = "*")
-  public Boolean confirmaVenda(@RequestBody final List<SubtotalDTO> itens) {
+  public boolean confirmaVenda(@RequestBody final List<SubtotalDTO> itens) {
     return cadastraVenda.executar(itens);
   }
 

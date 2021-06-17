@@ -20,7 +20,7 @@ public class Venda_IMPL implements IVendaRepository {
   public void cadastra(Venda venda) {
     RestTemplate restTemplate = new RestTemplate();
     HttpEntity<Venda> request = new HttpEntity<>(venda);
-    restTemplate.postForObject(BASE_URL + "/confirmacao", request, Venda.class);
+    restTemplate.postForEntity(BASE_URL + "confirmacao", request, Boolean.class);
   }
 
   @Override
