@@ -1,8 +1,11 @@
+/workspaces/Projeto e Arquitetura de Software/TF/projarq-tf/msestoque/src/main/java/com/msestoque/aplicacao/casosDeUso/ObterProdutoUC.java
 /workspaces/Projeto e Arquitetura de Software/TF/projarq-tf/msestoque/src/main/java/com/msestoque/negocio/entidades/Produto.java
 /workspaces/Projeto e Arquitetura de Software/TF/projarq-tf/msestoque/src/main/java/com/msestoque/negocio/entidades/ItemEstoque.java
 /workspaces/Projeto e Arquitetura de Software/TF/projarq-tf/msestoque/src/main/java/com/msestoque/negocio/servicos/ServicoEstoque.java
 /workspaces/Projeto e Arquitetura de Software/TF/projarq-tf/msestoque/src/main/java/com/msestoque/aplicacao/casosDeUso/AtualizaProdutoEstoqueUC.java
+/workspaces/Projeto e Arquitetura de Software/TF/projarq-tf/msestoque/src/main/java/com/msestoque/aplicacao/casosDeUso/ProdutosDisponiveisUC.java
 /workspaces/Projeto e Arquitetura de Software/TF/projarq-tf/msestoque/src/main/java/com/msestoque/App.java
+/workspaces/Projeto e Arquitetura de Software/TF/projarq-tf/msestoque/src/main/java/com/msestoque/aplicacao/casosDeUso/VerificaEstoqueProdutoUC.java
 /workspaces/Projeto e Arquitetura de Software/TF/projarq-tf/msestoque/src/main/java/com/msestoque/adaptadores/repositorios/implementacoes/Estoque_IMPL.java
 /workspaces/Projeto e Arquitetura de Software/TF/projarq-tf/msestoque/src/main/java/com/msestoque/adaptadores/controllers/EstoqueController.java
 /workspaces/Projeto e Arquitetura de Software/TF/projarq-tf/msestoque/src/main/java/com/msestoque/negocio/repositorios/IEstoqueRepository.java

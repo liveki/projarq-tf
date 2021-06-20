@@ -12,7 +12,9 @@ public class App {
   public RouteLocator myRoutes(RouteLocatorBuilder builder) {
     System.out.println("passei pelo gateway");
     return builder.routes().route(p -> p.path("/vendas/*").uri("http://servVenda:8080"))
-        .route(p -> p.path("/msvendas/*").uri("http://msVenda:8080")).build();
+        .route(p -> p.path("/msvendas/*").uri("http://msVenda:8080"))
+        .route(p -> p.path("/msestoque/*").uri("http://msEstoque:8080")).build();
+
   }
 
   public static void main(String[] args) {

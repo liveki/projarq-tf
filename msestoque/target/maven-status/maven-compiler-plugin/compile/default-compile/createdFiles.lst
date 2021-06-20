@@ -1,1 +1,12 @@
+com/msestoque/aplicacao/casosDeUso/ObterProdutoUC.class
+com/msestoque/negocio/servicos/ServicoEstoque.class
+com/msestoque/adaptadores/repositorios/implementacoes/Estoque_IMPL.class
+com/msestoque/negocio/entidades/Produto.class
+com/msestoque/adaptadores/repositorios/interfaces/IEstoqueRepositoryJPA.class
+com/msestoque/aplicacao/casosDeUso/AtualizaProdutoEstoqueUC.class
+com/msestoque/adaptadores/controllers/EstoqueController.class
 com/msestoque/App.class
+com/msestoque/aplicacao/casosDeUso/ProdutosDisponiveisUC.class
+com/msestoque/negocio/repositorios/IEstoqueRepository.class
+com/msestoque/aplicacao/casosDeUso/VerificaEstoqueProdutoUC.class
+com/msestoque/negocio/entidades/ItemEstoque.class

@@ -1,5 +1,7 @@
 package com.msestoque.adaptadores.repositorios.implementacoes;
 
+import java.util.List;
+
 import com.msestoque.adaptadores.repositorios.interfaces.IEstoqueRepositoryJPA;
 import com.msestoque.negocio.entidades.ItemEstoque;
 import com.msestoque.negocio.repositorios.IEstoqueRepository;
@@ -20,6 +22,16 @@ public class Estoque_IMPL implements IEstoqueRepository {
   @Override
   public void atualizaProduto(ItemEstoque itemEstoque) {
     estoqueRepository.save(itemEstoque);
+  }
+
+  @Override
+  public ItemEstoque getProduto(int codigo) {
+    return estoqueRepository.findByProdutoCodigo(codigo);
+  }
+
+  @Override
+  public List<ItemEstoque> getProdutosDisponiveis() {
+     return estoqueRepository.findByQtdadeGreaterThanEqual(1);
   }
 
 }

@@ -1,5 +1,7 @@
 package com.msestoque.negocio.servicos;
 
+import java.util.List;
+
 import com.msestoque.negocio.entidades.ItemEstoque;
 import com.msestoque.negocio.repositorios.IEstoqueRepository;
 
@@ -18,6 +20,23 @@ public class ServicoEstoque {
 
   public void atualizaProduto(ItemEstoque itemEstoque) {
     estoqueRepository.atualizaProduto(itemEstoque);
+  }
+
+  public boolean podeVender(int codProduto, int quantidade) {
+
+    boolean disponivel = false;
+    ItemEstoque produtoEncontrado = estoqueRepository.getProduto(codProduto);
+    disponivel = produtoEncontrado.getQtdade() >= quantidade;
+
+    return disponivel;
+  }
+
+  public List<ItemEstoque> getProdutosDisponiveis(){
+    return estoqueRepository.getProdutosDisponiveis();
+  }
+
+  public ItemEstoque getProduto(int codProduto){
+    return estoqueRepository.getProduto(codProduto);
   }
 
 }
