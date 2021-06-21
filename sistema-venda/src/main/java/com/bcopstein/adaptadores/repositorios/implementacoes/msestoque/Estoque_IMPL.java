@@ -13,48 +13,50 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
-public class Estoque_IMPL implements IEstoqueRepositoryMS{
+import reactor.core.publisher.Mono;
 
-    final String BASE_URL = "http://host.docker.internal:8080/msestoque/";
+public class Estoque_IMPL implements IEstoqueRepositoryMS {
 
-    @Override
-    public ItemEstoque getProduto(int codigo) {
+  final String BASE_URL = "http://host.docker.internal:8080/msestoque/";
+
+  @Override
+  public ItemEstoque getProduto(int codigo) {
+    WebClient client;
+    client = WebClient.builder().baseUrl(BASE_URL + "produto/" + codigo).build();
+    Mono<ItemEstoque> response = client.get().retrieve().bodyToMono(ItemEstoque.class);
+    return response.block();
+  }
+
+  @Override
+  public void atualizaProduto(ItemEstoque itemEstoque) {
     RestTemplate restTemplate = new RestTemplate();
-    ResponseEntity<ItemEstoque> response = restTemplate.getForEntity(BASE_URL + "produto/" + codigo, ItemEstoque.class);
-        return response.getBody();
-    }
+    HttpEntity<ItemEstoque> request = new HttpEntity<>(itemEstoque);
+    restTemplate.exchange(BASE_URL + "produto", HttpMethod.PATCH, request, Void.class);
+  }
 
-    @Override
-    public void atualizaProduto(ItemEstoque itemEstoque) {
-        RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<ItemEstoque> request = new HttpEntity<>(itemEstoque);
-        restTemplate.patchForObject(BASE_URL + "produto", request, Void.class);
-        
-    }
+  @Override
+  public Boolean autorizaProduto(int codProduto, int qtdade) {
+    RestTemplate restTemplate = new RestTemplate();
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Accept", "application/json");
 
-    @Override
-    public Boolean autorizaProduto(int codProduto, int qtdade) {
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Accept", "application/json");
+    Map<String, String> params = new HashMap<String, String>();
+    params.put("codProduto", Integer.toString(codProduto));
+    params.put("qtdade", Integer.toString(qtdade));
 
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("codProduto", Integer.toString(codProduto));
-        params.put("qtdade", Integer.toString(qtdade));
+    HttpEntity entity = new HttpEntity(headers);
+    HttpEntity<Boolean> response = restTemplate.exchange(BASE_URL + "autorizacao", HttpMethod.GET, entity,
+        Boolean.class, params);
+    return response.getBody();
+  }
 
-        HttpEntity entity = new HttpEntity(headers);
-        HttpEntity<Boolean> response = restTemplate.exchange(BASE_URL + "autorizacao", HttpMethod.GET, entity, Boolean.class, params);
-        return response.getBody();
-    }
+  @Override
+  public List<ItemEstoque> todos() {
+    RestTemplate restTemplate = new RestTemplate();
+    ResponseEntity<ItemEstoque[]> response = restTemplate.getForEntity(BASE_URL + "todos", ItemEstoque[].class);
+    return Arrays.asList(response.getBody());
+  }
 
-    @Override
-    public List<ItemEstoque> todos() {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<ItemEstoque[]> response = restTemplate.getForEntity(BASE_URL + "todos", ItemEstoque[].class);
-        return Arrays.asList(response.getBody());
-    }
-
-    
-    
 }

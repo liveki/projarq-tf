@@ -19,33 +19,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/estoque")
+@RequestMapping("/msestoque")
 public class EstoqueController {
   private AtualizaProdutoEstoqueUC atualizaEstoque;
   private VerificaEstoqueProdutoUC verificaEstoqueProduto;
   private ProdutosDisponiveisUC produtosDisponiveis;
   private ObterProdutoUC obterProduto;
 
- 
   @Autowired
-  public EstoqueController(AtualizaProdutoEstoqueUC atualizaEstoque, VerificaEstoqueProdutoUC verificaEstoqueProduto, ProdutosDisponiveisUC produtosDisponiveis, ObterProdutoUC obterProduto) {
+  public EstoqueController(AtualizaProdutoEstoqueUC atualizaEstoque, VerificaEstoqueProdutoUC verificaEstoqueProduto,
+      ProdutosDisponiveisUC produtosDisponiveis, ObterProdutoUC obterProduto) {
     this.atualizaEstoque = atualizaEstoque;
     this.verificaEstoqueProduto = verificaEstoqueProduto;
     this.produtosDisponiveis = produtosDisponiveis;
     this.obterProduto = obterProduto;
-}
+  }
 
   @PatchMapping("/produto")
   @CrossOrigin(origins = "*")
   public void atualizaProduto(@RequestBody final ItemEstoque itemEstoque) {
-  atualizaEstoque.executar(itemEstoque);
+    atualizaEstoque.executar(itemEstoque);
 
   }
 
   @GetMapping("/produto/{codProduto}")
   @CrossOrigin(origins = "*")
   public ItemEstoque getProduto(@PathVariable("codProduto") int codProduto) {
-  return obterProduto.executar(codProduto);
+    return obterProduto.executar(codProduto);
 
   }
 
@@ -62,4 +62,3 @@ public class EstoqueController {
   }
 
 }
-

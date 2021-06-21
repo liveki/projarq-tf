@@ -7,12 +7,13 @@ services:
   msVenda:
     ports:
       - "8082:8080"
-    image: "msvendas:latest" 
+    image: "msvendas:latest"
+  msEstoque:
+    ports:
+      - "8086:8080"
+    image: "msestoque:latest" 
   gateway:
     ports:
       - "8080:8080"
     image: "gateway:latest"
-  msEstoque:
-    ports:
-      - "8083:8080"
-    image: "msestoque:latest"
+ 
