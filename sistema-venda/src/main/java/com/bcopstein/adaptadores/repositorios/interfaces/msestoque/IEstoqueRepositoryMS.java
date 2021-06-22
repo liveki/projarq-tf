@@ -6,12 +6,9 @@ import com.bcopstein.negocio.entidades.ItemEstoque;
 import com.bcopstein.negocio.repositorios.IEstoqueRepository;
 
 public interface IEstoqueRepositoryMS extends IEstoqueRepository {
-    
-    ItemEstoque getProduto(int codigo);
 
-    Boolean autorizaProduto(int codProduto, int qtdade);
+  ItemEstoque getProduto(int codigo);
 
-    List<ItemEstoque> todos();
+  List<ItemEstoque> todos();
 
-   
 }

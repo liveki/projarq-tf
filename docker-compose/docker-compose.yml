@@ -10,7 +10,7 @@ services:
     image: "msvendas:latest"
   msEstoque:
     ports:
-      - "8086:8080"
+      - "8083:8080"
     image: "msestoque:latest" 
   gateway:
     ports:

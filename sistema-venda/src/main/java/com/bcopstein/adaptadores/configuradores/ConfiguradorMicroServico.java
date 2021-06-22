@@ -4,7 +4,6 @@ import com.bcopstein.adaptadores.repositorios.implementacoes.EstoqueJpa_IMPL;
 import com.bcopstein.adaptadores.repositorios.implementacoes.VendaJpa_IMPL;
 import com.bcopstein.adaptadores.repositorios.implementacoes.msestoque.Estoque_IMPL;
 import com.bcopstein.adaptadores.repositorios.implementacoes.msvendas.Venda_IMPL;
-import com.bcopstein.adaptadores.repositorios.interfaces.msestoque.IEstoqueRepositoryMS;
 import com.bcopstein.negocio.repositorios.IEstoqueRepository;
 import com.bcopstein.negocio.repositorios.IVendaRepository;
 

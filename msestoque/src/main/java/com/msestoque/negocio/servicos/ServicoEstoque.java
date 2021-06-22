@@ -22,20 +22,11 @@ public class ServicoEstoque {
     estoqueRepository.atualizaProduto(itemEstoque);
   }
 
-  public boolean podeVender(int codProduto, int quantidade) {
-
-    boolean disponivel = false;
-    ItemEstoque produtoEncontrado = estoqueRepository.getProduto(codProduto);
-    disponivel = produtoEncontrado.getQtdade() >= quantidade;
-
-    return disponivel;
-  }
-
-  public List<ItemEstoque> getProdutosDisponiveis(){
+  public List<ItemEstoque> getProdutosDisponiveis() {
     return estoqueRepository.getProdutosDisponiveis();
   }
 
-  public ItemEstoque getProduto(int codProduto){
+  public ItemEstoque getProduto(int codProduto) {
     return estoqueRepository.getProduto(codProduto);
   }
 
