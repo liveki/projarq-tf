@@ -1,6 +1,7 @@
 package com.bcopstein.negocio.servicos;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.bcopstein.aplicacao.servicos.ICalculoImposto;
@@ -36,6 +37,7 @@ public class ServicoVenda {
     }
 
     List<ItemCarrinho> produtos = novaVenda.getProdutos();
+    List<ItemEstoque> bkpEstoque = new ArrayList<>(0);
 
     for (ItemCarrinho produto : produtos) {
       boolean podeVender = servicoEstoque.podeVender(produto.getCodProduto(), produto.getQuantidade());
@@ -47,8 +49,16 @@ public class ServicoVenda {
 
     for (ItemCarrinho produto : produtos) {
       ItemEstoque itemEstoque = servicoEstoque.getProduto(produto.getCodProduto());
+      bkpEstoque.add(itemEstoque);
+
       itemEstoque.setQtdade(itemEstoque.getQtdade() - produto.getQuantidade());
-      servicoEstoque.atualizaProduto(itemEstoque);
+
+      try {
+        servicoEstoque.atualizaProduto(itemEstoque);
+      } catch (Exception ex) {
+        desfazerBaixaEstoque(bkpEstoque);
+        System.out.println("Não foi possível efetuar venda. Desfazendo baixa no estoque...");
+      }
     }
 
     this.vendaRepository.cadastra(novaVenda);
@@ -81,5 +91,11 @@ public class ServicoVenda {
 
   public List<Venda> todos() {
     return vendaRepository.todos();
+  }
+
+  void desfazerBaixaEstoque(List<ItemEstoque> bkpEstoque) {
+    for (ItemEstoque itemEstoque : bkpEstoque) {
+      servicoEstoque.atualizaProduto(itemEstoque);
+    }
   }
 }

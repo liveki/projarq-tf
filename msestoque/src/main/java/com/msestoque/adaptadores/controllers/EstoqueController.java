@@ -35,7 +35,6 @@ public class EstoqueController {
   @CrossOrigin(origins = "*")
   public void atualizaProduto(@RequestBody final ItemEstoque itemEstoque) {
     atualizaEstoque.executar(itemEstoque);
-
   }
 
   @GetMapping("/produto/{codProduto}")

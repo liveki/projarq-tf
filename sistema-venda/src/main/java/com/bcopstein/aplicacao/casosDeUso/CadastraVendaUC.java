@@ -31,6 +31,7 @@ public class CadastraVendaUC {
 
     for (SubtotalDTO item : itensDTO) {
       Produto novoProduto = produtos.stream().filter(p -> p.getCodigo() == item.getCodigo()).findFirst().orElse(null);
+
       itens.add(new ItemCarrinho(novoProduto.getCodigo(), Double.valueOf(novoProduto.getPreco()).intValue(),
           item.getQuantidade()));
     }
