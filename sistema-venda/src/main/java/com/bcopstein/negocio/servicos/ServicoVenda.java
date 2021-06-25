@@ -58,6 +58,7 @@ public class ServicoVenda {
       } catch (Exception ex) {
         desfazerBaixaEstoque(bkpEstoque);
         System.out.println("Não foi possível efetuar venda. Desfazendo baixa no estoque...");
+        return false;
       }
     }
 

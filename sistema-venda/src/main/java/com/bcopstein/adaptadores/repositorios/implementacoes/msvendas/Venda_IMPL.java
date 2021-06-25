@@ -6,8 +6,8 @@ import java.util.List;
 import com.bcopstein.negocio.entidades.Venda;
 import com.bcopstein.negocio.repositorios.IVendaRepository;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import reactor.core.publisher.Mono;
@@ -16,11 +16,12 @@ public class Venda_IMPL implements IVendaRepository {
   WebClient client;
   final String BASE_URL = "http://host.docker.internal:8080/msvendas/";
 
+  @Autowired
+  private RabbitTemplate rabbitTemplate;
+
   @Override
   public void cadastra(Venda venda) {
-    RestTemplate restTemplate = new RestTemplate();
-    HttpEntity<Venda> request = new HttpEntity<>(venda);
-    restTemplate.postForEntity(BASE_URL + "confirmacao", request, Boolean.class);
+    rabbitTemplate.convertAndSend("spring-boot-exchange", "vendas.nova", venda);
   }
 
   @Override
