@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bcopstein.negocio.entidades.Venda;
 import com.bcopstein.negocio.repositorios.IVendaRepository;
+import com.google.gson.Gson;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class Venda_IMPL implements IVendaRepository {
 
   @Override
   public void cadastra(Venda venda) {
-    rabbitTemplate.convertAndSend("spring-boot-exchange", "vendas.nova", venda);
+    String gsonObject = new Gson().toJson(venda);
+    rabbitTemplate.convertAndSend("spring-boot-exchange", "vendas.nova", gsonObject);
   }
 
   @Override

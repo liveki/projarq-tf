@@ -1,5 +1,6 @@
 package com.msvenda.negocio.entidades;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Venda {
+public class Venda implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

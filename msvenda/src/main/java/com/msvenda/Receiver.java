@@ -1,5 +1,6 @@
 package com.msvenda;
 
+import com.google.gson.Gson;
 import com.msvenda.negocio.entidades.Venda;
 import com.msvenda.negocio.servicos.ServicoVenda;
 
@@ -11,7 +12,8 @@ public class Receiver {
   @Autowired
   private ServicoVenda servicoVenda;
 
-  public void receiveMessage(Venda novaVenda) {
+  public void receiveMessage(String jsonObect) {
+    Venda novaVenda = new Gson().fromJson(jsonObect, Venda.class);
     servicoVenda.cadastraVenda(novaVenda);
   }
 }
