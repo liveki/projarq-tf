@@ -2,6 +2,7 @@ package com.bcopstein.adaptadores.repositorios.implementacoes.msestoque;
 
 import java.util.Arrays;
 import java.util.List;
+import com.google.gson.Gson;
 
 import com.bcopstein.adaptadores.repositorios.interfaces.msestoque.IEstoqueRepositoryMS;
 import com.bcopstein.negocio.entidades.ItemEstoque;
@@ -18,6 +19,9 @@ public class Estoque_IMPL implements IEstoqueRepositoryMS {
 
   final String BASE_URL = "http://host.docker.internal:8080/msestoque/";
 
+  @Autowired
+  private RabbitTemplate rabbitTemplate;
+
   public Estoque_IMPL() {
     restTemplate = new RestTemplate();
   }
@@ -30,10 +34,12 @@ public class Estoque_IMPL implements IEstoqueRepositoryMS {
 
   @Override
   public void atualizaProduto(ItemEstoque itemEstoque) {
-    HttpClient httpClient = HttpClients.createDefault();
-    HttpEntity<ItemEstoque> request = new HttpEntity<>(itemEstoque);
-    restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
-    restTemplate.patchForObject(BASE_URL + "produto", request, Void.class);
+    // HttpClient httpClient = HttpClients.createDefault();
+    // HttpEntity<ItemEstoque> request = new HttpEntity<>(itemEstoque);
+    // restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
+    // restTemplate.patchForObject(BASE_URL + "produto", request, Void.class);
+    String jsonObj = new Gson().toJson(itemEstoque);
+    rabbitTemplate.convertAndSend("spring-boot-exchange", "estoque.atualiza", jsonObj);
   }
 
   @Override

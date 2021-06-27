@@ -31,11 +31,11 @@ public class EstoqueController {
     this.obterProduto = obterProduto;
   }
 
-  @PatchMapping("/produto")
-  @CrossOrigin(origins = "*")
-  public void atualizaProduto(@RequestBody final ItemEstoque itemEstoque) {
-    atualizaEstoque.executar(itemEstoque);
-  }
+  // @PatchMapping("/produto")
+  // @CrossOrigin(origins = "*")
+  // public void atualizaProduto(@RequestBody final ItemEstoque itemEstoque) {
+  //   atualizaEstoque.executar(itemEstoque);
+  // }
 
   @GetMapping("/produto/{codProduto}")
   @CrossOrigin(origins = "*")
