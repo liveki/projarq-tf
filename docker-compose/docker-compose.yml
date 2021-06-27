@@ -20,6 +20,8 @@ services:
     build: ../msvenda
     image: "msvendas:latest"
   msEstoque:
+    depends_on:
+      - "rabbitmq"
     ports:
       - "8083:8080"
     build: ../msestoque

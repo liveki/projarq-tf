@@ -7,11 +7,9 @@ import com.google.gson.Gson;
 import com.bcopstein.adaptadores.repositorios.interfaces.msestoque.IEstoqueRepositoryMS;
 import com.bcopstein.negocio.entidades.ItemEstoque;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.springframework.http.HttpEntity;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 public class Estoque_IMPL implements IEstoqueRepositoryMS {
@@ -34,10 +32,6 @@ public class Estoque_IMPL implements IEstoqueRepositoryMS {
 
   @Override
   public void atualizaProduto(ItemEstoque itemEstoque) {
-    // HttpClient httpClient = HttpClients.createDefault();
-    // HttpEntity<ItemEstoque> request = new HttpEntity<>(itemEstoque);
-    // restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
-    // restTemplate.patchForObject(BASE_URL + "produto", request, Void.class);
     String jsonObj = new Gson().toJson(itemEstoque);
     rabbitTemplate.convertAndSend("spring-boot-exchange", "estoque.atualiza", jsonObj);
   }

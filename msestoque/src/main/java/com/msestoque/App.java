@@ -18,7 +18,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = { "com.msestoque" })
 @EnableJpaRepositories(basePackages = { "com.msestoque" })
 @EntityScan(basePackages = { "com.msestoque" })
-
 public class App {
   static final String topicExchangeName = "spring-boot-exchange";
   static final String queueName = "spring-boot";
